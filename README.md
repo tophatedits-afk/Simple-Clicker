@@ -1,4 +1,4 @@
-# Vibe Clicker
+# Simple Clicker
 
 ## Features
 
@@ -23,7 +23,7 @@
 
 ## Play Online
 
-Once GitHub Pages is enabled, the game will be playable online.
+https://tophatedits-afk.github.io/Simple-Clicker/
 
 ## Technologies Used
 
