@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Clicker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="background-decorations">
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+    <div class="tophat"></div>
+  </div>
+  <main class="container">
+    <h1>Simple Clicker</h1>
+    <div class="counter-card">
+      <p>Clicks:</p>
+      <span id="count">0</span>
+    </div>
+    <div id="effectsContainer" class="effects-container"></div>
+    <button id="clickButton">Click me</button>
+    <button id="resetButton" class="secondary">Reset</button>
+    
+    <div class="prestige-card">
+      <h3>Prestige Power</h3>
+      <p>Prestige Points: <span id="prestigePoints">0</span></p>
+      <p>Prestige Multiplier: <span id="prestigeMultiplier">1.0</span>x</p>
+      <p>Rebirths: <span id="rebirthCount">0</span></p>
+      <button id="rebirthButton" class="rebirth" title="Spend clicks to rebirth and unlock prestige bonuses">Rebirth (Cost: 1,000,000)</button>
+      <p id="prestigeStatus" class="prestige-status">Prestige upgrades unlock after your first rebirth.</p>
+    </div>
+    
+    <div class="upgrades-section">
+      <h2>Upgrades</h2>
+      <div class="upgrade">
+        <div class="upgrade-actions">
+          <button id="autoClickerButton" title="Generates 1 click per second automatically">Auto-Clicker (Cost: 10)</button>
+          <button id="autoClickerMaxButton" class="max">Max</button>
+        </div>
+        <span id="autoClickerCount">0</span>
+      </div>
+      <div class="upgrade">
+        <div class="upgrade-actions">
+          <button id="multiplierButton" title="Each level increases click value by 1x">Multiplier (Cost: 50)</button>
+          <button id="multiplierMaxButton" class="max">Max</button>
+        </div>
+        <span id="multiplierCount">0</span>
+      </div>
+      <div class="upgrade">
+        <div class="upgrade-actions">
+          <button id="criticalClickButton" title="Each level adds 5% crit chance (2x damage)">Critical Click (Cost: 100)</button>
+          <button id="criticalClickMaxButton" class="max">Max</button>
+        </div>
+        <span id="criticalClickCount">0</span>
+      </div>
+      <div class="upgrade">
+        <div class="upgrade-actions">
+          <button id="clickPowerButton" title="Each level increases base click power by 1">Click Power (Cost: 200)</button>
+          <button id="clickPowerMaxButton" class="max">Max</button>
+        </div>
+        <span id="clickPowerCount">0</span>
+      </div>
+      <div class="upgrade">
+        <div class="upgrade-actions">
+          <button id="superAutoButton" title="Generates 5 clicks per second automatically">Super Auto-Clicker (Cost: 500)</button>
+          <button id="superAutoMaxButton" class="max">Max</button>
+        </div>
+        <span id="superAutoCount">0</span>
+      </div>
+      <div class="upgrade">
+        <div class="upgrade-actions">
+          <button id="megaBoostButton" title="Each level increases damage multiplier by 1x">Mega Boost (Cost: 1200)</button>
+          <button id="megaBoostMaxButton" class="max">Max</button>
+        </div>
+        <span id="megaBoostCount">0</span>
+      </div>
+      <div class="upgrade">
+        <div class="upgrade-actions">
+          <button id="luckyCharmButton" title="Each level adds 5% luck & 5% crit chance">Lucky Charm (Cost: 2000)</button>
+          <button id="luckyCharmMaxButton" class="max">Max</button>
+        </div>
+        <span id="luckyCharmCount">0</span>
+      </div>
+      <div class="upgrade">
+        <div class="upgrade-actions">
+          <button id="quantumSurgeButton" title="Each level +0.5x quantum multiplier & +1 click multiplier & +5 auto clicks">Quantum Surge (Cost: 4500)</button>
+          <button id="quantumSurgeMaxButton" class="max">Max</button>
+        </div>
+        <span id="quantumSurgeCount">0</span>
+      </div>
+      <div class="upgrade">
+        <div class="upgrade-actions">
+          <button id="hyperdriveButton" title="Each level +20 auto clicks, +5% crit, +1 mega boost">Hyperdrive (Cost: 10000)</button>
+          <button id="hyperdriveMaxButton" class="max">Max</button>
+        </div>
+        <span id="hyperdriveCount">0</span>
+      </div>
+      <div class="upgrade">
+        <div class="upgrade-actions">
+          <button id="timeWarpButton" title="Each level adds 2 automatic clicks per second passively">Time Warp (Cost: 25000)</button>
+          <button id="timeWarpMaxButton" class="max">Max</button>
+        </div>
+        <span id="timeWarpCount">0</span>
+      </div>
+      <div class="upgrade">
+        <div class="upgrade-actions">
+          <button id="etherealButton" title="Each level adds 0.1x to all multipliers (stackable)">Ethereal Force (Cost: 50000)</button>
+          <button id="etherealMaxButton" class="max">Max</button>
+        </div>
+        <span id="etherealCount">0</span>
+      </div>
+      <div class="upgrade">
+        <div class="upgrade-actions">
+          <button id="ultraClaimButton" title="Each level provides +10% boost to all upgrades efficiency">Ultra Claim (Cost: 100000)</button>
+          <button id="ultraClaimMaxButton" class="max">Max</button>
+        </div>
+        <span id="ultraClaimCount">0</span>
+      </div>
+    </div>
+    
+    <div class="stats">
+      <p>Auto-clicks per second: <span id="autoClicksPerSecond">0</span></p>
+      <p>Click multiplier: <span id="clickMultiplier">1</span>x</p>
+      <p>Critical chance: <span id="criticalChance">0</span>%</p>
+      <p>Click power: <span id="clickPower">1</span></p>
+      <p>Mega boost: <span id="megaBoost">1</span>x</p>
+      <p>Lucky bonus: <span id="luckyBonus">0</span>%</p>
+      <p>Quantum surge: <span id="quantumStrength">1</span>x</p>
+      <p>Hyperdrive level: <span id="hyperdriveLevel">0</span></p>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
