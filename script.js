@@ -1,5 +1,5 @@
 // ========================
-// 🎮 CENTRAL GAME STATE
+// Variables
 // ========================
 const Game = {
   count: 0,
@@ -33,6 +33,26 @@ const Game = {
   etherealMultiplier: 1,
   ultraClaimBonus: 1,
 };
+
+// ========================
+// 💾 SAVE SYSTEM
+// ========================
+const SAVE_KEY = "simpleClickerSave_v2";
+
+function saveGame() {
+  localStorage.setItem(SAVE_KEY, JSON.stringify(Game));
+}
+
+function loadGame() {
+  const data = JSON.parse(localStorage.getItem(SAVE_KEY));
+  if (!data) return;
+
+  for (const key in data) {
+    if (key in Game) {
+      Game[key] = data[key];
+    }
+  }
+}
 
 // ========================
 // 🛡️ ANTI-CHEAT GUARD
@@ -111,6 +131,7 @@ clickButton.addEventListener("click", () => {
 
   Game.count += value;
 
+  saveGame();
   updateUI();
 });
 
@@ -134,6 +155,7 @@ resetButton.addEventListener("click", () => {
   Game.etherealMultiplier = 1;
   Game.ultraClaimBonus = 1;
 
+  saveGame();
   updateUI();
 });
 
@@ -153,7 +175,7 @@ rebirthButton.addEventListener("click", () => {
   Game.prestigeMultiplier += 0.1;
   Game.rebirthCost = Math.floor(Game.rebirthCost * 1.7);
 
-  // reset progress (keep prestige)
+  // reset progress
   Game.count = 0;
 
   Game.autoClickers = 0;
@@ -177,6 +199,7 @@ rebirthButton.addEventListener("click", () => {
   Game.quantumStrength = 1;
   Game.autoClicksPerSecond = 0;
 
+  saveGame();
   updateUI();
 });
 
@@ -193,14 +216,14 @@ setInterval(() => {
 }, 1000);
 
 // ========================
-// 🛡️ ANTI-CHEAT LOOP
+// 💾 AUTO SAVE LOOP
 // ========================
 setInterval(() => {
-  sanitize();
-  updateUI();
-}, 500);
+  saveGame();
+}, 3000);
 
 // ========================
 // 🚀 INIT
 // ========================
+loadGame();
 updateUI();
