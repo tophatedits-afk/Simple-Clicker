@@ -69,13 +69,15 @@ const prestigeMultiplierEl = el("prestigeMultiplier");
 const rebirthCountEl = el("rebirthCount");
 const prestigeStatusEl = el("prestigeStatus");
 
-// upgrades
+//================
+// UPGRADES
+//===============
 const upgrades = [
   {
     button: el("autoClickerButton"),
     maxButton: el("autoClickerMaxButton"),
     countEl: el("autoClickerCount"),
-    cost: () => 10 + Game.autoClickers * 5,
+    cost: () => 10 + Game.autoClickers * 20,
     buy: () => {
       const cost = upgrades[0].cost();
       if (Game.count < cost) return;
@@ -88,7 +90,7 @@ const upgrades = [
     button: el("multiplierButton"),
     maxButton: el("multiplierMaxButton"),
     countEl: el("multiplierCount"),
-    cost: () => 50 + Game.multipliers * 25,
+    cost: () => 50 + Game.multipliers * 50,
     buy: () => {
       const cost = upgrades[1].cost();
       if (Game.count < cost) return;
@@ -101,7 +103,7 @@ const upgrades = [
     button: el("criticalClickButton"),
     maxButton: el("criticalClickMaxButton"),
     countEl: el("criticalClickCount"),
-    cost: () => 100 + Game.criticalClicks * 50,
+    cost: () => 100 + Game.criticalClicks * 150,
     buy: () => {
       const cost = upgrades[2].cost();
       if (Game.count < cost) return;
@@ -114,7 +116,7 @@ const upgrades = [
     button: el("clickPowerButton"),
     maxButton: el("clickPowerMaxButton"),
     countEl: el("clickPowerCount"),
-    cost: () => 200 + Game.clickPowers * 100,
+    cost: () => 200 + Game.clickPowers * 150,
     buy: () => {
       const cost = upgrades[3].cost();
       if (Game.count < cost) return;
@@ -127,7 +129,7 @@ const upgrades = [
     button: el("superAutoButton"),
     maxButton: el("superAutoMaxButton"),
     countEl: el("superAutoCount"),
-    cost: () => 500 + Game.superAutos * 250,
+    cost: () => 500 + Game.superAutos * 300,
     buy: () => {
       const cost = upgrades[4].cost();
       if (Game.count < cost) return;
@@ -140,7 +142,7 @@ const upgrades = [
     button: el("megaBoostButton"),
     maxButton: el("megaBoostMaxButton"),
     countEl: el("megaBoostCount"),
-    cost: () => 1200 + Game.megaBoosts * 400,
+    cost: () => 1200 + Game.megaBoosts * 1000,
     buy: () => {
       const cost = upgrades[5].cost();
       if (Game.count < cost) return;
@@ -153,7 +155,7 @@ const upgrades = [
     button: el("luckyCharmButton"),
     maxButton: el("luckyCharmMaxButton"),
     countEl: el("luckyCharmCount"),
-    cost: () => 2000 + Game.luckyCharms * 500,
+    cost: () => 2000 + Game.luckyCharms * 1000,
     buy: () => {
       const cost = upgrades[6].cost();
       if (Game.count < cost) return;
@@ -167,7 +169,7 @@ const upgrades = [
     button: el("quantumSurgeButton"),
     maxButton: el("quantumSurgeMaxButton"),
     countEl: el("quantumSurgeCount"),
-    cost: () => 4500 + Game.quantumSurges * 1200,
+    cost: () => 4500 + Game.quantumSurges * 2500,
     buy: () => {
       const cost = upgrades[7].cost();
       if (Game.count < cost) return;
@@ -182,7 +184,7 @@ const upgrades = [
     button: el("hyperdriveButton"),
     maxButton: el("hyperdriveMaxButton"),
     countEl: el("hyperdriveCount"),
-    cost: () => 10000 + Game.hyperdrives * 2500,
+    cost: () => 10000 + Game.hyperdrives * 5000,
     buy: () => {
       const cost = upgrades[8].cost();
       if (Game.count < cost) return;
@@ -198,7 +200,7 @@ const upgrades = [
     button: el("timeWarpButton"),
     maxButton: el("timeWarpMaxButton"),
     countEl: el("timeWarpCount"),
-    cost: () => 25000 + Game.timeWarps * 3000,
+    cost: () => 25000 + Game.timeWarps * 7500,
     buy: () => {
       const cost = upgrades[9].cost();
       if (Game.count < cost) return;
@@ -211,7 +213,7 @@ const upgrades = [
     button: el("etherealButton"),
     maxButton: el("etherealMaxButton"),
     countEl: el("etherealCount"),
-    cost: () => 50000 + Game.ethereals * 5000,
+    cost: () => 50000 + Game.ethereals * 15000,
     buy: () => {
       const cost = upgrades[10].cost();
       if (Game.count < cost) return;
@@ -224,7 +226,7 @@ const upgrades = [
     button: el("ultraClaimButton"),
     maxButton: el("ultraClaimMaxButton"),
     countEl: el("ultraClaimCount"),
-    cost: () => 100000 + Game.ultraClaims * 8000,
+    cost: () => 100000 + Game.ultraClaims * 25000,
     buy: () => {
       const cost = upgrades[11].cost();
       if (Game.count < cost) return;
@@ -234,6 +236,29 @@ const upgrades = [
     },
   },
 ];
+const upgradeNames = [
+  "Auto-Clicker",
+  "Multiplier",
+  "Critical Click",
+  "Click Power",
+  "Super Auto-Clicker",
+  "Mega Boost",
+  "Lucky Charm",
+  "Quantum Surge",
+  "Hyperdrive",
+  "Time Warp",
+  "Ethereal Force",
+  "Ultra Claim"
+];
+
+function updateUpgradeButtons() {
+  upgrades.forEach((u, i) => {
+    if (!u.button) return;
+
+    const cost = Math.floor(u.cost()).toLocaleString();
+    u.button.textContent = `${upgradeNames[i]} (Cost: ${cost})`;
+  });
+}
 
 // ========================
 // UPDATE UI
@@ -269,6 +294,7 @@ function update() {
   rebirthCountEl.textContent = Game.rebirthCount;
 
   rebirthButton.textContent = `Rebirth (Cost: ${Game.rebirthCost.toLocaleString()})`;
+  updateUpgradeButtons();
 }
 
 // ========================
