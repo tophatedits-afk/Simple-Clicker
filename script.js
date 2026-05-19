@@ -68,6 +68,15 @@ const prestigePointsEl = el("prestigePoints");
 const prestigeMultiplierEl = el("prestigeMultiplier");
 const rebirthCountEl = el("rebirthCount");
 const prestigeStatusEl = el("prestigeStatus");
+const autoClicksPerSecondEl = el("autoClicksPerSecond");
+const clickMultiplierEl = el("clickMultiplier");
+const criticalChanceEl = el("criticalChance");
+const clickPowerEl = el("clickPower");
+const megaBoostEl = el("megaBoost");
+const luckyBonusEl = el("luckyBonus");
+const quantumStrengthEl = el("quantumStrength");
+const hyperdriveLevelEl = el("hyperdriveLevel");
+;
 
 //================
 // UPGRADES
@@ -75,16 +84,19 @@ const prestigeStatusEl = el("prestigeStatus");
 const upgrades = [
   {
     button: el("autoClickerButton"),
-    maxButton: el("autoClickerMaxButton"),
-    countEl: el("autoClickerCount"),
-    cost: () => 10 + Game.autoClickers * 20,
-    buy: () => {
-      const cost = upgrades[0].cost();
-      if (Game.count < cost) return;
-      Game.count -= cost;
-      Game.autoClickers++;
-      Game.autoClicksPerSecond += 1;
-    },
+maxButton: el("autoClickerMaxButton"),
+countEl: el("autoClickerCount"),
+cost: () => 10 + Game.autoClickers * 20,
+buy: () => {
+  console.log("AutoClicker bought!");
+
+  const cost = upgrades[0].cost();
+  if (Game.count < cost) return;
+
+  Game.count -= cost;
+  Game.autoClickers++;
+  Game.autoClicksPerSecond += 1;
+},
   },
   {
     button: el("multiplierButton"),
@@ -256,8 +268,11 @@ function updateUpgradeButtons() {
     if (!u.button) return;
 
     const cost = Math.floor(u.cost()).toLocaleString();
-    u.button.textContent = `${upgradeNames[i]} (Cost: ${cost})`;
+    
   });
+}
+    function formatCost(u) {
+  return Math.floor(u.cost()).toLocaleString();
 }
 
 // ========================
@@ -294,7 +309,32 @@ function update() {
   rebirthCountEl.textContent = Game.rebirthCount;
 
   rebirthButton.textContent = `Rebirth (Cost: ${Game.rebirthCost.toLocaleString()})`;
-  updateUpgradeButtons();
+
+  upgrades.forEach((u, i) => {
+  if (!u.countEl || !u.button) return;
+
+  const keys = [
+    "autoClickers",
+    "multipliers",
+    "criticalClicks",
+    "clickPowers",
+    "superAutos",
+    "megaBoosts",
+    "luckyCharms",
+    "quantumSurges",
+    "hyperdrives",
+    "timeWarps",
+    "ethereals",
+    "ultraClaims"
+  ];
+
+  u.countEl.textContent = Game[keys[i]] ?? 0;
+
+  const baseName = u.button.id.replace("Button", "");
+
+  u.button.textContent =
+    `${baseName} (Cost: ${formatCost(u)})`;
+});
 }
 
 // ========================
@@ -314,6 +354,21 @@ clickButton?.addEventListener("click", () => {
   if (Math.random() < Game.luckyBonus / 100) value *= 1.25;
 
   Game.count += value;
+  autoClicksPerSecondEl.textContent = Game.autoClicksPerSecond;
+
+clickMultiplierEl.textContent = Game.clickMultiplier.toFixed(1);
+
+criticalChanceEl.textContent = Game.criticalChance;
+
+clickPowerEl.textContent = Game.clickPower;
+
+megaBoostEl.textContent = Game.megaBoost.toFixed(1);
+
+luckyBonusEl.textContent = Game.luckyBonus;
+
+quantumStrengthEl.textContent = Game.quantumStrength.toFixed(1);
+
+hyperdriveLevelEl.textContent = Game.hyperdriveLevel;
 
   saveGame();
   update();
@@ -366,12 +421,30 @@ rebirthButton?.addEventListener("click", () => {
 
   Game.prestigePoints += Math.floor(Game.count / Game.rebirthCost);
   Game.rebirthCount++;
-  Game.prestigeMultiplier += 0.1;
+  Game.prestigeMultiplier *= 1.25;
   Game.rebirthCost = Math.floor(Game.rebirthCost * 1.7);
 
   Game.count = 0;
+  Game,clickMultiplier = 1;
+  Game.clickPower = 1;
+  Game.etherealMultiplier = 1;
+  Game.ultraClaimBonus = 1;
+  Game.quantumStrength = 1;
+  Game.megaBoost = 1;
+  //Upgrades:
   Game.autoClicksPerSecond = 0;
-
+  Game.autoClickers = 0;
+  Game.multipliers = 0;
+  Game.criticalClicks = 0;
+  Game.clickPowers = 0;
+  Game.superAutos = 0;
+  Game.megaBoosts = 0;
+  Game.luckyCharms = 0;
+  Game.quantumSurges = 0;
+  Game.hyperdrives = 0;
+  Game.ethereals = 0;
+  Game.timeWarps = 0;
+  Game.ultraClaims = 0;
   update();
   saveGame();
 });
