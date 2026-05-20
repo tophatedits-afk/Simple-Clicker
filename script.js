@@ -83,20 +83,20 @@ const hyperdriveLevelEl = el("hyperdriveLevel");
 //===============
 const upgrades = [
   {
-    button: el("AutoClickerButton"), 
-    maxButton: el("AutoClickerMaxButton"),
-    countEl: el("autoClickerCount"),
-    cost: () => 10 + Game.autoClickers * 20,
-    buy: () => {  
-    console.log("AutoClicker bought!");
+    button: el("autoClickerButton"),
+maxButton: el("autoClickerMaxButton"),
+countEl: el("autoClickerCount"),
+cost: () => 10 + Game.autoClickers * 20,
+buy: () => {
+  console.log("AutoClicker bought!");
 
-    const cost = upgrades[0].cost();
-    if (Game.count < cost) return;
+  const cost = upgrades[0].cost();
+  if (Game.count < cost) return;
 
-      Game.count -= cost;
-      Game.autoClickers++;
-      Game.autoClicksPerSecond += 1;
-    },
+  Game.count -= cost;
+  Game.autoClickers++;
+  Game.autoClicksPerSecond += 1;
+},
   },
   {
     button: el("multiplierButton"),
@@ -287,18 +287,18 @@ function update() {
   if (!u.countEl) return;
 
   const keys = [
-    "AutoClickers",
-    "Multipliers",
-    "CriticalClicks",
-    "ClickPowers",
-    "SuperAutos",
-    "MegaBoosts",
-    "LuckyCharms",
-    "QuantumSurges",
-    "Hyperdrives",
-    "TimeWarps",
-    "Ethereals",
-    "UltraClaims"
+    "autoClickers",
+    "multipliers",
+    "criticalClicks",
+    "clickPowers",
+    "superAutos",
+    "megaBoosts",
+    "luckyCharms",
+    "quantumSurges",
+    "hyperdrives",
+    "timeWarps",
+    "ethereals",
+    "ultraClaims"
   ];
 
   u.countEl.textContent = Game[keys[i]] ?? 0;
@@ -314,18 +314,18 @@ function update() {
   if (!u.countEl || !u.button) return;
 
   const keys = [
-    "AutoClickers",
-    "Multipliers",
-    "CriticalClicks",
-    "ClickPowers",
-    "SuperAutos",
-    "MegaBoosts",
-    "LuckyCharms",
-    "QuantumSurges",
-    "Hyperdrives",
-    "TimeWarps",
-    "Ethereals",
-    "UltraClaims"
+    "autoClickers",
+    "multipliers",
+    "criticalClicks",
+    "clickPowers",
+    "superAutos",
+    "megaBoosts",
+    "luckyCharms",
+    "quantumSurges",
+    "hyperdrives",
+    "timeWarps",
+    "ethereals",
+    "ultraClaims"
   ];
 
   u.countEl.textContent = Game[keys[i]] ?? 0;
@@ -433,7 +433,7 @@ rebirthButton?.addEventListener("click", () => {
   Game.megaBoost = 1;
   //Upgrades:
   Game.autoClicksPerSecond = 0;
-  Game.AutoClickers = 0;
+  Game.autoClickers = 0;
   Game.multipliers = 0;
   Game.criticalClicks = 0;
   Game.clickPowers = 0;
